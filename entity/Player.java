@@ -29,6 +29,8 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
+
+        // Loads the images for the player movement
         try {
 
             up1 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_up_1.png"));
@@ -47,6 +49,8 @@ public class Player extends Entity {
 
     public void update() {
 
+        // SpriteCounter will increase on key press which will change the spiteNum to
+        // create player movement
         if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true
                 || keyH.rightPressed == true) {
             spriteCounter++;
@@ -61,6 +65,7 @@ public class Player extends Entity {
 
         }
 
+        // When a key press it will update the player location based on key pressed
         if (keyH.upPressed == true) {
             direction = "up";
             y -= speed;
@@ -85,6 +90,7 @@ public class Player extends Entity {
 
         BufferedImage image = null;
 
+        // Draws the character movement based on the spriteNum
         switch (direction) {
             case "up":
                 if (spriteNum == 1) {

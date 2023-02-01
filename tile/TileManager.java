@@ -19,6 +19,7 @@ public class TileManager {
 
         this.gp = gp;
 
+        // The number of different types of tiles allow is 10
         tile = new Tile[10];
         mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
 
@@ -29,6 +30,7 @@ public class TileManager {
 
     public void getTileImage() {
 
+        // Loads the tiles and sets a image to that tile value
         try {
 
             tile[0] = new Tile();
@@ -46,6 +48,10 @@ public class TileManager {
     }
 
     public void loadMap(String filePath) {
+        /*
+         * Reads a filePath and get the information from the file
+         * That information is sent to allow for drawing of the main map
+         */
         try {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));

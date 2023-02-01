@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.image.BufferedImage;
 
+// Allow for different entries to be created
 public class Entity {
 
     public int x, y;

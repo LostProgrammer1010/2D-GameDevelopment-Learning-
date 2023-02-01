@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GamePanel() {
 
+        // Sets the size of the sceen the back ground color
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); // Helps with rendering performance
@@ -39,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void statGameThread() {
-
+        // Thread allows for the game to be updating all the time
         gameThread = new Thread(this);
         gameThread.start(); // Calls the run method
     }
