@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 
 public class Player extends Entity {
 
@@ -22,6 +23,13 @@ public class Player extends Entity {
 
         screenX = gp.screenWidth / 2;
         screenY = gp.screenHeight / 2;
+
+        solidArea = new Rectangle();
+
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
 
         setDefaultValues();
         getPlayerImage();
@@ -56,6 +64,8 @@ public class Player extends Entity {
 
     public void update() {
 
+        System.out.println(direction);
+
         // SpriteCounter will increase on key press which will change the spiteNum to
         // create player movement
         if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true
@@ -69,23 +79,42 @@ public class Player extends Entity {
                 }
                 spriteCounter = 0;
             }
+            if (keyH.upPressed == true) {
+                direction = "up";
+            } else if (keyH.downPressed == true) {
+                direction = "down";
+            } else if (keyH.rightPressed == true) {
+                direction = "right";
+            } else if (keyH.leftPressed == true) {
+                direction = "left";
+            }
+            // Checks plyaer tile collsions
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+            // If Collision is flase, player can move
+            if (collisionOn == false) {
+                switch (direction) {
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+
+                }
+
+            }
 
         }
 
         // When a key press it will update the player location based on key pressed
-        if (keyH.upPressed == true) {
-            direction = "up";
-            worldY -= speed;
-        } else if (keyH.downPressed == true) {
-            direction = "down";
-            worldY += speed;
-        } else if (keyH.rightPressed == true) {
-            direction = "right";
-            worldX += speed;
-        } else if (keyH.leftPressed == true) {
-            direction = "left";
-            worldX -= speed;
-        }
 
     }
 
