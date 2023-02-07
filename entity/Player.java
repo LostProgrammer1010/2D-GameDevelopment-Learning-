@@ -64,8 +64,6 @@ public class Player extends Entity {
 
     public void update() {
 
-        System.out.println(direction);
-
         // SpriteCounter will increase on key press which will change the spiteNum to
         // create player movement
         if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true
