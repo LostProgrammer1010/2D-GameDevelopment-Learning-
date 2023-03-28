@@ -1,6 +1,5 @@
 package main;
 
-import java.io.IOException;
 import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
