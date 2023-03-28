@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+
 import java.awt.Graphics2D;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -134,13 +135,19 @@ public class Player extends Entity {
                     hasKey++;
                     gp.obj[i] = null;
                     System.out.println("# of Keys:" + hasKey);
+                    gp.playSoundEffect(1);
                     break;
                 case "Door":
                     if (hasKey > 0) {
                         gp.obj[i] = null;
                         hasKey--;
+                        gp.playSoundEffect(3);
                     }
-                    System.out.println("# of Keys:" + hasKey);
+                    break;
+                case "Boots":
+                    speed += 1;
+                    gp.obj[i] = null;
+                    gp.playSoundEffect(2);
                     break;
             }
         }
@@ -198,5 +205,7 @@ public class Player extends Entity {
         }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
+
+
 
 }
