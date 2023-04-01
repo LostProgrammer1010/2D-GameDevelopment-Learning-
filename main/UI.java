@@ -23,7 +23,7 @@ public class UI {
         this.gp = gp;
         this.arial_40 = new Font("Arial", Font.PLAIN, 40);
         this.arial_50B = new Font("Bold", Font.PLAIN, 80);
-        OBJ_Key key = new OBJ_Key();
+        OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
     }
 
