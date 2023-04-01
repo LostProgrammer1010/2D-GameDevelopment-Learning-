@@ -70,7 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
         double drawInterval = 1_000_000_000 / FPS; // 0.01666 second for each update of screen
         double nextDrawTime = System.nanoTime() + drawInterval;
 
-        // This have the game running
+        // RUNNING GAME
         while (gameThread != null) {
 
             // 1 Update: update information such as character postion

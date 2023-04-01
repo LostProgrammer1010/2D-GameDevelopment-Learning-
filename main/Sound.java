@@ -23,6 +23,7 @@ public class Sound {
     }
     
 
+    //GRABS SOUND FILE THAT IS TO BE PLAYEED
     public void setFile(int i) {
 
         try{

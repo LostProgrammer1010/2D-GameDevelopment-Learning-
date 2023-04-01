@@ -11,6 +11,7 @@ public class KeyHandler implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    //KEY PRESSED HANDLER
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -29,6 +30,8 @@ public class KeyHandler implements KeyListener {
         }
     }
 
+
+    //KEY RELEASE HANDLER
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
