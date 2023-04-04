@@ -19,6 +19,8 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
+    public boolean playerHasWand = false;
+
     public Player(GamePanel gp, KeyHandler keyH) {
 
         this.gp = gp;
@@ -172,7 +174,7 @@ public class Player extends Entity {
                     left2 = setup("object/wizard_walk_wand_left_2");
                     left3 = setup("object/wizard_walk_wand_left_3");
                     left4 = setup("object/wizard_walk_wand_left_4");
-                    gp.ui.showMessage("You got a Wand!");
+                    this.playerHasWand = true;
                     break;
             
 
