@@ -20,6 +20,7 @@ public class Player extends Entity {
     public final int screenY;
 
     public boolean playerHasWand = false;
+    public boolean playerAttack = false;
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -50,36 +51,50 @@ public class Player extends Entity {
         direction = "down";
     }
 
+    public void attack(String attackType){
+        if (!playerAttack){
+        if (attackType.equals("Wand")){
+            playerAttack = true;
+            spriteCounter = 0;
+            spriteNum = 1;
+            System.out.println("Attack with wand");
+        }
+    }
+    }
+
     public void getPlayerImage() {
 
         // Loads the images for the player movement
-            up1 = setup("wizard_walk_up_1");
-            up2 = setup("wizard_walk_up_2");
-            up3 = setup("wizard_walk_up_3");
-            up4 = setup("wizard_walk_up_4");
-            down1 = setup("wizard_walk_down_1");
-            down2 = setup("wizard_walk_down_2");
-            down3 = setup("wizard_walk_down_3");
-            down4 = setup("wizard_walk_down_4");
-            right1 = setup("wizard_walk_right_1");
-            right2 = setup("wizard_walk_right_2");
-            right3 = setup("wizard_walk_right_3");
-            right4 = setup("wizard_walk_right_4");
-            left1 = setup("wizard_walk_left_1");
-            left2 = setup("wizard_walk_left_2");
-            left3 = setup("wizard_walk_left_3");
-            left4 = setup("wizard_walk_left_4");
+            up1 = setup("wizard_walk_up_1", gp.tileSize, gp.tileSize);
+            up2 = setup("wizard_walk_up_2", gp.tileSize, gp.tileSize);
+            up3 = setup("wizard_walk_up_3", gp.tileSize, gp.tileSize);
+            up4 = setup("wizard_walk_up_4", gp.tileSize, gp.tileSize);
+            down1 = setup("wizard_walk_down_1", gp.tileSize, gp.tileSize);
+            down2 = setup("wizard_walk_down_2", gp.tileSize, gp.tileSize);
+            down3 = setup("wizard_walk_down_3", gp.tileSize, gp.tileSize);
+            down4 = setup("wizard_walk_down_4", gp.tileSize, gp.tileSize);
+            right1 = setup("wizard_walk_right_1", gp.tileSize, gp.tileSize);
+            right2 = setup("wizard_walk_right_2", gp.tileSize, gp.tileSize);
+            right3 = setup("wizard_walk_right_3", gp.tileSize, gp.tileSize);
+            right4 = setup("wizard_walk_right_4", gp.tileSize, gp.tileSize);
+            left1 = setup("wizard_walk_left_1", gp.tileSize, gp.tileSize);
+            left2 = setup("wizard_walk_left_2", gp.tileSize, gp.tileSize);
+            left3 = setup("wizard_walk_left_3", gp.tileSize, gp.tileSize);
+            left4 = setup("wizard_walk_left_4", gp.tileSize, gp.tileSize);
+            attackRight1 = setup("wizard_wand_attack_right_1", 2*gp.tileSize-2, gp.tileSize-1);
+            attackRight2 = setup("wizard_wand_attack_right_2", 2*gp.tileSize-3, gp.tileSize-1);
+            attackRight3 = setup("wizard_wand_attack_right_3", 2*gp.tileSize-1, gp.tileSize-2);
+            
 
     }
 
-    public BufferedImage setup(String imageName){
-        
+    public BufferedImage setup(String imageName, int width, int height){
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
 
         try{
             image = ImageIO.read(getClass().getResourceAsStream(String.format("/res/player/%s.png", imageName)));
-            image = uTool.scaledImage(image, gp.tileSize, gp.tileSize);
+            image = uTool.scaledImage(image, width, height);
 
 
         }catch (IOException e){
@@ -89,14 +104,31 @@ public class Player extends Entity {
     }
 
     public void update() {
+        if (playerAttack){
+            spriteCounter++;
+            if (spriteCounter > 15) {
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } 
+                else if (spriteNum == 2){
+                    spriteNum = 3;
+                }
+                else if (spriteNum == 3){
+                    spriteNum = 4;
+                }
+                else{
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
+        }
+        
+    }
 
         // SpriteCounter will increase on key press which will change the spiteNum to
         // create player movement
-        if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true
-                || keyH.rightPressed == true) {
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             spriteCounter++;
             if (spriteCounter > 15) {
-
                 if (spriteNum == 1) {
                     spriteNum = 2;
                 } 
@@ -145,14 +177,12 @@ public class Player extends Entity {
                         break;
 
                 }
-
             }
-
-        }
 
         // When a key press it will update the player location based on key pressed
 
     }
+}
 
     public void pickUpObject(int i) {
         if (i != 999) {
@@ -162,19 +192,20 @@ public class Player extends Entity {
             switch (objectName) {
                 case "Wand":
                     gp.obj[i] = null;
-                    down1 = setup("object/wizard_walk_wand_down_1");
-                    down2 = setup("object/wizard_walk_wand_down_2");
-                    down3 = setup("object/wizard_walk_wand_down_3");
-                    down4 = setup("object/wizard_walk_wand_down_4");
-                    right1 = setup("object/wizard_walk_wand_right_1");
-                    right2 = setup("object/wizard_walk_wand_right_2");
-                    right3 = setup("object/wizard_walk_wand_right_3");
-                    right4 = setup("object/wizard_walk_wand_right_4");
-                    left1 = setup("object/wizard_walk_wand_left_1");
-                    left2 = setup("object/wizard_walk_wand_left_2");
-                    left3 = setup("object/wizard_walk_wand_left_3");
-                    left4 = setup("object/wizard_walk_wand_left_4");
-                    this.playerHasWand = true;
+                    down1 = setup("object/wizard_walk_wand_down_1", gp.tileSize, gp.tileSize);
+                    down2 = setup("object/wizard_walk_wand_down_2", gp.tileSize, gp.tileSize);
+                    down3 = setup("object/wizard_walk_wand_down_3", gp.tileSize, gp.tileSize);
+                    down4 = setup("object/wizard_walk_wand_down_4", gp.tileSize, gp.tileSize);
+                    right1 = setup("object/wizard_walk_wand_right_1", gp.tileSize, gp.tileSize);
+                    right2 = setup("object/wizard_walk_wand_right_2", gp.tileSize, gp.tileSize);
+                    right3 = setup("object/wizard_walk_wand_right_3", gp.tileSize, gp.tileSize);
+                    right4 = setup("object/wizard_walk_wand_right_4", gp.tileSize, gp.tileSize);
+                    left1 = setup("object/wizard_walk_wand_left_1", gp.tileSize, gp.tileSize);
+                    left2 = setup("object/wizard_walk_wand_left_2", gp.tileSize, gp.tileSize);
+                    left3 = setup("object/wizard_walk_wand_left_3", gp.tileSize, gp.tileSize);
+                    left4 = setup("object/wizard_walk_wand_left_4", gp.tileSize, gp.tileSize);
+                    playerHasWand = true;
+                    System.out.println(playerHasWand);
                     break;
             
 
@@ -206,6 +237,7 @@ public class Player extends Entity {
                 if (spriteNum == 4){
                     image = up4;
                 }
+                
 
                 break;
 
@@ -226,6 +258,7 @@ public class Player extends Entity {
                 break;
 
             case "right":
+            if (!playerAttack){
                 if (spriteNum == 1) {
                     image = right1;
                 }
@@ -238,6 +271,22 @@ public class Player extends Entity {
                 if (spriteNum == 4){
                     image = right4;
                 }
+            }else{
+                if (spriteNum == 1){
+                    image = attackRight1;
+                }
+                if (spriteNum == 2) {
+                    image = attackRight2;
+                }
+                if (spriteNum == 3){
+                    image = attackRight3;
+                }
+                if (spriteNum == 4){
+                    image = right4;
+                    playerAttack = false;
+                }
+            }
+
                 break;
 
             case "left":

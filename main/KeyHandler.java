@@ -3,6 +3,7 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;
@@ -36,7 +37,6 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
 
-
     }
 
 
@@ -63,6 +63,11 @@ public class KeyHandler implements KeyListener {
             }
             else if (gp.gameState == gp.pauseState){
                 gp.gameState = gp.playState;
+            }
+        }
+        if (code == KeyEvent.VK_Q) {
+            if (gp.player.playerHasWand){
+                gp.player.attack("Wand");
             }
         }
         // DEBUG
