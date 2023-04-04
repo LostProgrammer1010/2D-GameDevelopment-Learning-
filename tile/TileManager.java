@@ -121,7 +121,7 @@ public class TileManager {
 
                     String numbers[] = line.split(" ");
 
-                    int num = Integer.parseInt(numbers[col]);
+                    int num = Integer.parseInt(numbers[col],10);
 
                     mapTileNum[col][row] = num;
                     col++;

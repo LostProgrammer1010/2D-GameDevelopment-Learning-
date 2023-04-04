@@ -1,9 +1,6 @@
 package main;
 
-import objects.OBJ_Boots;
-import objects.OBJ_Chest;
-import objects.OBJ_Door;
-import objects.OBJ_Key;
+import objects.OBJ_Wand;
 
 public class AssetSetter {
 
@@ -14,6 +11,10 @@ public class AssetSetter {
     }
 
     public void setObject() {
+
+        gp.obj[0] = new OBJ_Wand(gp);
+        gp.obj[0].worldX = 39 * gp.tileSize;
+        gp.obj[0].worldY = 9 * gp.tileSize;
 
     }
 

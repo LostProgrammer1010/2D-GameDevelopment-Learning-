@@ -154,9 +154,30 @@ public class Player extends Entity {
 
     public void pickUpObject(int i) {
         if (i != 999) {
+
+            String objectName = gp.obj[i].name;
+
+            switch (objectName) {
+                case "Wand":
+                    gp.obj[i] = null;
+                    down1 = setup("object/wizard_walk_wand_down_1");
+                    down2 = setup("object/wizard_walk_wand_down_2");
+                    down3 = setup("object/wizard_walk_wand_down_3");
+                    down4 = setup("object/wizard_walk_wand_down_4");
+                    right1 = setup("object/wizard_walk_wand_right_1");
+                    right2 = setup("object/wizard_walk_wand_right_2");
+                    right3 = setup("object/wizard_walk_wand_right_3");
+                    right4 = setup("object/wizard_walk_wand_right_4");
+                    left1 = setup("object/wizard_walk_wand_left_1");
+                    left2 = setup("object/wizard_walk_wand_left_2");
+                    left3 = setup("object/wizard_walk_wand_left_3");
+                    left4 = setup("object/wizard_walk_wand_left_4");
+                    gp.ui.showMessage("You got a Wand!");
+                    break;
             
 
         }
+    }
 
     }
 
